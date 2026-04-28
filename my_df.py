@@ -1,0 +1,62 @@
+from datetime import datetime, timedelta
+import pandas as pd
+
+from parser import Exercice
+
+
+class MyDataFrame(pd.DataFrame) :
+
+    @staticmethod
+    def new(path : str):
+        df = MyDataFrame(pd.read_csv(path, index_col="date", parse_dates=True))
+
+        #Création nouvelles mesures
+
+        return df
+    
+    def view(self):
+        print("\n", self, "\n")
+
+
+    def select_exercice(self, rhs : Exercice):
+        return MyDataFrame(self[self["exercice"] == rhs.value])
+    
+
+    def mesure(self, rhs : str):
+        return MyDataFrame(self[rhs])
+    
+
+    ########## DATE ##########
+
+
+    def day_d(self, d : datetime):
+        return MyDataFrame(self[self.index == d.date().__str__()])
+    
+
+    def today(self):
+        return self.day_d(datetime.today())
+
+
+    def dates_between(self, lhs : datetime, rhs : datetime):
+        return MyDataFrame( self[ lhs.__str__() : rhs.__str__() ] )
+    
+
+    def dates_after(self, rhs : datetime):
+        return MyDataFrame( self[ rhs.__str__() : pd.to_datetime("today") ] )
+
+
+    def n_days_ago(self, n : int):
+        target_date = datetime.today() - timedelta(days = n)
+        return self.dates_after(target_date.date())
+    
+
+    def this_week(self):
+        today = datetime.today()
+        last_monday = today - timedelta(days=today.isoweekday() - 1)
+        return self.dates_after(last_monday.date())
+    
+
+    def this_month(self):
+        today = datetime.today()
+        first_day_of_the_month = today - timedelta(days=today.day - 1)
+        return self.dates_after(first_day_of_the_month.date())
