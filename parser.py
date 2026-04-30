@@ -8,7 +8,11 @@ import pandas as pd
 class Exercice(Enum):
     POMPE = "pompe"
     TRACTION_SUPINATION = "traction supination"
+    TRACTION_PRONATION = "traction pronation"
     SQUAT = "squat"
+    DIPS = "dips"
+
+    
 
 
 class Serie():
@@ -54,7 +58,6 @@ class Measure:
 
 class Parser_CSV:
     def __init__(self, path):
-        self.df = pd.read_csv(path)
         self.df_clone = pd.read_csv(path)
         self.path = path
 
@@ -65,7 +68,7 @@ class Parser_CSV:
 
 
     def clean_measures_pending(self):
-        self.df_clone = self.df
+        self.df_clone = pd.read_csv(self.path)
 
 
     def view_df_clone(self):

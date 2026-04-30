@@ -4,11 +4,11 @@ import pandas as pd
 from parser import Exercice
 
 
-class MyDataFrame(pd.DataFrame) :
+class Visualizer(pd.DataFrame) :
 
     @staticmethod
     def new(path : str):
-        df = MyDataFrame(pd.read_csv(path, index_col="date", parse_dates=True))
+        df = Visualizer(pd.read_csv(path, index_col="date", parse_dates=True))
 
         #Création nouvelles mesures
 
@@ -19,18 +19,18 @@ class MyDataFrame(pd.DataFrame) :
 
 
     def select_exercice(self, rhs : Exercice):
-        return MyDataFrame(self[self["exercice"] == rhs.value])
+        return Visualizer(self[self["exercice"] == rhs.value])
     
 
     def mesure(self, rhs : str):
-        return MyDataFrame(self[rhs])
+        return Visualizer(self[rhs])
     
 
     ########## DATE ##########
 
 
     def day_d(self, d : datetime):
-        return MyDataFrame(self[self.index == d.date().__str__()])
+        return Visualizer(self[self.index == d.date().__str__()])
     
 
     def today(self):
@@ -38,11 +38,11 @@ class MyDataFrame(pd.DataFrame) :
 
 
     def dates_between(self, lhs : datetime, rhs : datetime):
-        return MyDataFrame( self[ lhs.__str__() : rhs.__str__() ] )
+        return Visualizer( self[ lhs.__str__() : rhs.__str__() ] )
     
 
     def dates_after(self, rhs : datetime):
-        return MyDataFrame( self[ rhs.__str__() : pd.to_datetime("today") ] )
+        return Visualizer( self[ rhs.__str__() : pd.to_datetime("today") ] )
 
 
     def n_days_ago(self, n : int):
