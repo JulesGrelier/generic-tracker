@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import pandas as pd
 
-from parser import Exo
+from parser import Ex
 
 
 class Visualizer(pd.DataFrame) :
@@ -18,7 +18,7 @@ class Visualizer(pd.DataFrame) :
         print("\n", self, "\n")
 
 
-    def select_exercice(self, rhs : Exo):
+    def select_exercice(self, rhs : Ex):
         return Visualizer(self[self["exercice"] == rhs.value])
     
 
@@ -42,8 +42,7 @@ class Visualizer(pd.DataFrame) :
     
 
     def dates_after(self, rhs : datetime):
-        return Visualizer( self[ rhs.__str__() : pd.to_datetime("today") ] )
-
+        return Visualizer( self[ rhs.__str__() : datetime.today().__str__() ] )
 
     def n_days_ago(self, n : int):
         target_date = datetime.today() - timedelta(days = n)
