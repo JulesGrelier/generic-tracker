@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import pandas as pd
 
-from parser import Exercice
+from parser import Exo
 
 
 class Visualizer(pd.DataFrame) :
@@ -18,7 +18,7 @@ class Visualizer(pd.DataFrame) :
         print("\n", self, "\n")
 
 
-    def select_exercice(self, rhs : Exercice):
+    def select_exercice(self, rhs : Exo):
         return Visualizer(self[self["exercice"] == rhs.value])
     
 

@@ -1,5 +1,5 @@
 from visualizer import Visualizer, datetime
-from parser import Parser_CSV, Serie, Measure, Exercice
+from parser import Parser_CSV, Serie, Measure, Exo
 
 path = "./data.csv"
 today = datetime.today()
