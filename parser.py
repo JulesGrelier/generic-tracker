@@ -23,9 +23,9 @@ class Measure():
             ex : Ex,
             kg : float | tuple[float],
             nb_reps : float | tuple[float],
-            nb_series : int = nan,
+            nb_series : int = 1,
             min_repos : float | tuple[float] = nan,
-            date : datetime = datetime.today()
+            date : datetime = datetime.today().date()
             ) -> pd.DataFrame:
             
             for i in [kg, nb_reps, min_repos] :
@@ -44,7 +44,7 @@ class Measure():
                 "nb_reps" : [array.iloc[:,1].sum()],
                 "nb_series" : [nb_series],
                 "exercice" : [ex.value],
-                "min_repos" : [array.iloc[:,2].sum()]
+                "min_repos" : [array.iloc[:,2].sum(min_count=0.1)]
             })
 
 
