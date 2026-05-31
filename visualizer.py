@@ -1,4 +1,5 @@
 from enum import Enum, auto
+from pathlib import Path
 from datetime import datetime, timedelta
 import pandas as pd
 
@@ -18,15 +19,6 @@ class Unit(Enum):
 
 
 class Visualizer(pd.DataFrame) :
-
-
-    
-    def __init__(self, rhs):
-        if isinstance(rhs, str):
-            rhs = pd.read_csv(rhs, index_col="date", parse_dates=True)
-
-        super().__init__(rhs)
-    
 
     def print(self):
         print("\n", self, "\n")
@@ -98,3 +90,6 @@ class Visualizer(pd.DataFrame) :
 
         
 
+def new_visualizer(path : Path) -> Visualizer:
+    df = pd.read_csv(path, index_col="date", parse_dates=True)
+    return Visualizer(df)
