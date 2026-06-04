@@ -5,7 +5,7 @@ from typing import Self
 
 
 class GenericTracker():
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path | str) -> None:
         self.df: pd.DataFrame = pd.read_csv(path, index_col="date", parse_dates=True)
 
 

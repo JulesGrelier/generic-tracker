@@ -5,7 +5,7 @@ from ..generic_tracker import GenericTracker
 from src.muscu_tracker.consts import Ex, Unit
 
 class MuscuTracker(GenericTracker):
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path | str) -> None:
         super().__init__(path)
 
 
