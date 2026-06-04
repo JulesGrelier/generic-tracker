@@ -1,5 +1,5 @@
 from pathlib import Path
-from datetime import datetime
+from datetime import date
 from numpy import nan
 from pandas import DataFrame
 from consts import Ex
@@ -11,7 +11,7 @@ def measure_to_str(
         nb_reps : float | tuple[float],
         nb_series : int = 1,
         min_repos : float | tuple[float] = nan,
-        date = datetime.today().date()
+        date: date = date.today()
 ) -> str:
         
     for i in [kg, nb_reps, min_repos] :
@@ -37,11 +37,11 @@ def measure_to_str(
     return output
 
 
-def poids_totale(kg_corps: float, kg_leste: float) -> float:
+def poids_totale_pompe(kg_corps: float, kg_leste: float) -> float:
     return 0.65*kg_corps + 0.8*kg_leste
 
 
-def freeze_measure(textual_measure: str, path_file: Path | str) -> None:
+def freeze_measure(textual_measure: str, path_file: Path) -> None:
     with open(path_file, mode="a") as f:
         f.write(f"\n{textual_measure}")
-        print(f"Nouvelle mesure enregistrée en dur dans le fichier {path_file.__str__()}")
+        print(f"Nouvelle mesure enregistrée en dur dans le fichier {path_file}")
