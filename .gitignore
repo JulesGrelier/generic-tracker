@@ -3,5 +3,6 @@ env
 
 *.ipynb
 
-data.csv
+*.csv
 todo.txt
+main.py
