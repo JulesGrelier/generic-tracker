@@ -2,9 +2,9 @@ from pathlib import Path
 from typing import Self
 
 from ..generic_tracker import GenericTracker
-from src.muscu_tracker.consts import Ex, Unit
+from src.perf_tracker.consts import Ex, Unit
 
-class MuscuTracker(GenericTracker):
+class PerfTracker(GenericTracker):
     def __init__(self, path: Path | str) -> None:
         super().__init__(path)
 
@@ -22,7 +22,7 @@ class MuscuTracker(GenericTracker):
             case Unit.TONNAGE_PAR_SERIE:
                 return self._new_operator_column("tonnage", "nb_series", "kg/series")
             case Unit.NB_REPS_PAR_SERIE:
-                return self._new_operator_column("nb_resp", "nb_reps", "nb_reps/series")
+                return self._new_operator_column("nb_reps", "nb_reps", "nb_reps/series")
             case Unit.REPOS:
                 return self.column("min_repos")
             case Unit.TONNAGE_PAR_REPOS:

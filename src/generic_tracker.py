@@ -31,27 +31,31 @@ class GenericTracker():
         self.df = self.df[str(date_from) : str(date_to)]
         return self
     
+    def before(self, due_date: date) -> Self:
+        self.df = self.df[ : str(due_date) ]
+        return self
+    
 
-    def dates_after(self, due_date: date) -> Self:
-        self.df = self.df[ str(due_date) : str(due_date.today()) ]
+    def after(self, due_date: date) -> Self:
+        self.df = self.df[ str(due_date) : ]
         return self
 
 
     def n_days_ago(self, n: int) -> Self:
         target_date = date.today() - timedelta(days = n)
-        return self.dates_after(target_date)
+        return self.after(target_date)
 
 
     def this_week(self) -> Self:
         today = date.today()
         last_monday = today - timedelta(days=today.isoweekday() - 1)
-        return self.dates_after(last_monday)
+        return self.after(last_monday)
     
 
     def this_month(self) -> Self:
         today = date.today()
         first_day_of_the_month = today - timedelta(days=today.day - 1)
-        return self.dates_after(first_day_of_the_month)        
+        return self.after(first_day_of_the_month)        
 
 
     def column(self, column: str) -> Self:
